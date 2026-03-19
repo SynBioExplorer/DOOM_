@@ -9,6 +9,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "UnrealDoom/Core/DoomTypes.h"
 #include "UnrealDoom/Entities/DoomEntityInfo.h"
+#include "UnrealDoom/AI/DoomAI.h"
 #include "DoomEntity.generated.h"
 
 // Forward declarations
@@ -18,24 +19,6 @@ class ADoomEntity;
 // Think function signature - mirrors thinker_t action pointer
 // =============================================================================
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMobjStateChanged, int32, NewStateIndex);
-
-// =============================================================================
-// EDoomDirection - Movement directions for AI (p_enemy.c)
-// =============================================================================
-UENUM(BlueprintType)
-enum class EDoomDirection : uint8
-{
-	East = 0,
-	NorthEast = 1,
-	North = 2,
-	NorthWest = 3,
-	West = 4,
-	SouthWest = 5,
-	South = 6,
-	SouthEast = 7,
-	NoDir = 8,
-	NumDirections = 9
-};
 
 // =============================================================================
 // ADoomEntity - Base class for all DOOM map objects (mobj_t port)

@@ -288,7 +288,7 @@ public:
 
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-		FActorComponentTickProperties& ThisTickFunction) override;
+		FActorComponentTickFunction* ThisTickFunction) override;
 
 	// =========================================================================
 	// Action routines - direct ports from p_enemy.c

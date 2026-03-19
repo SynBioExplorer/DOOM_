@@ -350,31 +350,31 @@ void ADoomGameMode::DetectGameMode()
 	if (bHasMAP01)
 	{
 		DoomState->SetGameMode(EDoomGameMode::Commercial);
-		DoomState->SetGameMission(EDoomGameMission::Doom2);
+		DoomState->SetGameMission(EDoomMission::Doom2);
 		UE_LOG(LogDoomGameMode, Log, TEXT("Detected game mode: Commercial (DOOM 2)"));
 	}
 	else if (bHasE4M1)
 	{
 		DoomState->SetGameMode(EDoomGameMode::Retail);
-		DoomState->SetGameMission(EDoomGameMission::Doom);
+		DoomState->SetGameMission(EDoomMission::Doom);
 		UE_LOG(LogDoomGameMode, Log, TEXT("Detected game mode: Retail (Ultimate DOOM)"));
 	}
 	else if (bHasE2M1)
 	{
 		DoomState->SetGameMode(EDoomGameMode::Registered);
-		DoomState->SetGameMission(EDoomGameMission::Doom);
+		DoomState->SetGameMission(EDoomMission::Doom);
 		UE_LOG(LogDoomGameMode, Log, TEXT("Detected game mode: Registered (DOOM)"));
 	}
 	else if (bHasE1M1)
 	{
 		DoomState->SetGameMode(EDoomGameMode::Shareware);
-		DoomState->SetGameMission(EDoomGameMission::Doom);
+		DoomState->SetGameMission(EDoomMission::Doom);
 		UE_LOG(LogDoomGameMode, Log, TEXT("Detected game mode: Shareware (DOOM)"));
 	}
 	else
 	{
 		DoomState->SetGameMode(EDoomGameMode::Indetermined);
-		DoomState->SetGameMission(EDoomGameMission::None);
+		DoomState->SetGameMission(EDoomMission::None);
 		UE_LOG(LogDoomGameMode, Warning, TEXT("Could not determine game mode from WAD contents"));
 	}
 }

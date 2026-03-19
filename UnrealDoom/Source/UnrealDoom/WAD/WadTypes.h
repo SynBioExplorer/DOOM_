@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Core/DoomTypes.h"
 #include "WadTypes.generated.h"
 
 // ============================================================================
@@ -17,16 +18,7 @@ enum class EWadType : uint8
 	Invalid = 255
 };
 
-/** Game mode detection based on loaded WADs */
-UENUM(BlueprintType)
-enum class EDoomGameMode : uint8
-{
-	Shareware = 0,		// DOOM1 shareware (E1 only)
-	Registered = 1,		// DOOM1 registered (E1-E3)
-	Commercial = 2,		// DOOM2 commercial
-	Retail = 3,			// Ultimate DOOM (E1-E4)
-	Indetermined = 255
-};
+// EDoomGameMode is defined in Core/DoomTypes.h
 
 /** Map lump ordering within a WAD - matches original ML_* enum */
 UENUM(BlueprintType)

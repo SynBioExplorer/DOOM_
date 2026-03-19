@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "Core/DoomTypes.h"
 #include "DoomGameState.generated.h"
 
 /** Maximum number of players in a DOOM game. */
@@ -13,90 +14,10 @@ static constexpr int32 DOOM_TICRATE = 35;
 /** Number of backup tics for networking. */
 static constexpr int32 DOOM_BACKUPTICS = 12;
 
-/**
- * Game mode - identifies the IWAD version.
- * Maps directly to the original DOOM GameMode_t enum.
- */
-UENUM(BlueprintType)
-enum class EDoomGameMode : uint8
-{
-	Shareware       UMETA(DisplayName = "Shareware"),
-	Registered      UMETA(DisplayName = "Registered"),
-	Commercial      UMETA(DisplayName = "Commercial"),
-	Retail          UMETA(DisplayName = "Retail"),
-	Indetermined    UMETA(DisplayName = "Indetermined")
-};
+// EDoomGameMode, EDoomLanguage, EDoomGameState, EDoomSkill, EDoomGameAction
+// are all defined in Core/DoomTypes.h
 
-/**
- * Game mission - identifies the mission pack.
- */
-UENUM(BlueprintType)
-enum class EDoomGameMission : uint8
-{
-	Doom        UMETA(DisplayName = "DOOM"),
-	Doom2       UMETA(DisplayName = "DOOM 2"),
-	PackTNT     UMETA(DisplayName = "TNT: Evilution"),
-	PackPlut    UMETA(DisplayName = "The Plutonia Experiment"),
-	None        UMETA(DisplayName = "None")
-};
-
-/**
- * Language for software localization.
- */
-UENUM(BlueprintType)
-enum class EDoomLanguage : uint8
-{
-	English     UMETA(DisplayName = "English"),
-	French      UMETA(DisplayName = "French"),
-	German      UMETA(DisplayName = "German"),
-	Unknown     UMETA(DisplayName = "Unknown")
-};
-
-/**
- * Current game state - what screen/mode the game is in.
- * Maps to gamestate_t in the original DOOM source.
- */
-UENUM(BlueprintType)
-enum class EDoomGameState : uint8
-{
-	Level           UMETA(DisplayName = "Level"),
-	Intermission    UMETA(DisplayName = "Intermission"),
-	Finale          UMETA(DisplayName = "Finale"),
-	DemoScreen      UMETA(DisplayName = "Demo Screen")
-};
-
-/**
- * Skill / difficulty settings.
- * Maps to skill_t in the original DOOM source.
- */
-UENUM(BlueprintType)
-enum class EDoomSkill : uint8
-{
-	Baby        UMETA(DisplayName = "I'm Too Young To Die"),
-	Easy        UMETA(DisplayName = "Hey, Not Too Rough"),
-	Medium      UMETA(DisplayName = "Hurt Me Plenty"),
-	Hard        UMETA(DisplayName = "Ultra-Violence"),
-	Nightmare   UMETA(DisplayName = "Nightmare!")
-};
-
-/**
- * Game actions - deferred state transitions.
- * Maps to gameaction_t in the original DOOM source.
- */
-UENUM(BlueprintType)
-enum class EDoomGameAction : uint8
-{
-	Nothing     UMETA(DisplayName = "Nothing"),
-	LoadLevel   UMETA(DisplayName = "Load Level"),
-	NewGame     UMETA(DisplayName = "New Game"),
-	LoadGame    UMETA(DisplayName = "Load Game"),
-	SaveGame    UMETA(DisplayName = "Save Game"),
-	PlayDemo    UMETA(DisplayName = "Play Demo"),
-	Completed   UMETA(DisplayName = "Completed"),
-	Victory     UMETA(DisplayName = "Victory"),
-	WorldDone   UMETA(DisplayName = "World Done"),
-	Screenshot  UMETA(DisplayName = "Screenshot")
-};
+// EDoomMission (game mission) is defined in Core/DoomTypes.h
 
 /**
  * UDoomGameState - Central repository for all global DOOM game state.
@@ -128,10 +49,10 @@ public:
 	void SetGameMode(EDoomGameMode InMode) { GameMode = InMode; }
 
 	UFUNCTION(BlueprintPure, Category = "Doom|GameState")
-	EDoomGameMission GetGameMission() const { return GameMission; }
+	EDoomMission GetGameMission() const { return GameMission; }
 
 	UFUNCTION(BlueprintCallable, Category = "Doom|GameState")
-	void SetGameMission(EDoomGameMission InMission) { GameMission = InMission; }
+	void SetGameMission(EDoomMission InMission) { GameMission = InMission; }
 
 	UFUNCTION(BlueprintPure, Category = "Doom|GameState")
 	EDoomLanguage GetLanguage() const { return Language; }
@@ -409,7 +330,7 @@ protected:
 	EDoomGameMode GameMode;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Doom|GameState")
-	EDoomGameMission GameMission;
+	EDoomMission GameMission;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Doom|GameState")
 	EDoomLanguage Language;

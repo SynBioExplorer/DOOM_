@@ -9,7 +9,7 @@ void UDoomGameState::Initialize()
 {
 	// Game identification
 	GameMode = EDoomGameMode::Indetermined;
-	GameMission = EDoomGameMission::Doom;
+	GameMission = EDoomMission::Doom;
 	Language = EDoomLanguage::English;
 
 	// Game state machine
