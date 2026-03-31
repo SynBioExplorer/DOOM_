@@ -560,7 +560,7 @@ public:
 	/** P_CheckMissileRange: Should this monster fire a missile?
 	 *  Considers distance, reaction time, monster type, and random chance. */
 	UFUNCTION(BlueprintCallable, Category = "Doom AI|Movement")
-	bool P_CheckMissileRange() const;
+	bool P_CheckMissileRange();
 
 	// =========================================================================
 	// Sound propagation - port of P_RecursiveSound / P_NoiseAlert

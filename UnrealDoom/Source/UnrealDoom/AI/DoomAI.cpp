@@ -247,7 +247,7 @@ bool UDoomAIComponent::P_CheckMeleeRange() const
 // P_CheckMissileRange - port of P_CheckMissileRange from p_enemy.c
 // =============================================================================
 
-bool UDoomAIComponent::P_CheckMissileRange() const
+bool UDoomAIComponent::P_CheckMissileRange()
 {
 	if (!IsTargetValid())
 		return false;
@@ -257,8 +257,8 @@ bool UDoomAIComponent::P_CheckMissileRange() const
 
 	if (Flags & MF_JUSTHIT)
 	{
-		// Target just hit us, fight back!
-		// Note: can't clear flag in const method, caller should handle
+		// The target just hit the enemy, so fight back!
+		Flags &= ~MF_JUSTHIT;
 		return true;
 	}
 
@@ -634,16 +634,9 @@ void UDoomAIComponent::A_Look()
 	// Go into chase state
 	if (!SeeSound.IsNone())
 	{
-		// Sound variation for zombie/imp see sounds (faithful to original)
-		OnPlaySound.Broadcast(SeeSound);
-
 		// Bosses play at full volume (Spider Mastermind, Cyberdemon)
-		if (MonsterType == EDoomMonsterType::Spider
-			|| MonsterType == EDoomMonsterType::Cyborg)
-		{
-			// Full volume - broadcast globally
-			OnPlaySound.Broadcast(SeeSound);
-		}
+		// Regular monsters play positional sound
+		OnPlaySound.Broadcast(SeeSound);
 	}
 
 	SetAIState(EDoomAIState::Chase);
@@ -904,6 +897,8 @@ void UDoomAIComponent::A_HeadAttack()
 void UDoomAIComponent::A_BruisAttack()
 {
 	if (!IsTargetValid()) return;
+
+	A_FaceTarget();
 
 	if (P_CheckMeleeRange())
 	{
